@@ -1,26 +1,14 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "../src/styles/GlobalStyle";
+import { Theme } from "./styles/Theme";
+import SmallButton from "./components/SmallButton";
 import { ThemeProvider } from "styled-components";
+import SigningButton from "./components/SigningButton";
 function App() {
   return (
     <ThemeProvider theme={Theme}>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <SigningButton text="" disabled={true} />
+      <SmallButton text="" disabled={true} />
     </ThemeProvider>
   );
 }
