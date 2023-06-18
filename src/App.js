@@ -1,12 +1,14 @@
 import "./App.css";
 import "../src/styles/GlobalStyle";
-import { ThemeProvider } from "styled-components";
 import { Theme } from "./styles/Theme";
-import Header from "./components/Header";
+import SmallButton from "./components/SmallButton";
+import { ThemeProvider } from "styled-components";
+import SigningButton from "./components/SigningButton";
 function App() {
   return (
     <ThemeProvider theme={Theme}>
-      <Header />
+      <SigningButton text="" disabled={true} />
+      <SmallButton text="" disabled={true} />
     </ThemeProvider>
   );
 }
