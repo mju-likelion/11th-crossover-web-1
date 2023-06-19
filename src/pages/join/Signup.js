@@ -3,7 +3,20 @@ import LargeButton from "../../components/LargeButton";
 import Header from "../../components/Header";
 import InputBox from "../../components/InputBox";
 
-const Signup = ({ isActive, text }) => {
+const Signup = ({ isActive, text, isError, isEmpty, isCorrect }) => {
+  const placeholderText = {
+    id: "아이디",
+    password: "비밀번호",
+    email: "이메일",
+  };
+
+  const helpText = {
+    id: "영문과 숫자을 조합하여 5~10글자 미만으로 입력하여 주세요.",
+    password:
+      "영문과 숫자, 특수기호를 조합하여 8~14 글자 미만으로 입력하여 주세요.",
+    email: "사용하실 이메일을 입력해주세요.",
+  };
+
   return (
     <>
       <Header />
@@ -11,9 +24,27 @@ const Signup = ({ isActive, text }) => {
         <SignupContainer>
           <SignupTitle>회원가입</SignupTitle>
           <InputContainer>
-            {/* <inputfield> */}
-            {/* <inputfield> */}
-            {/* <inputfield> */}
+            <InputBox
+              helpText={helpText.id}
+              placeholderText={placeholderText.id}
+              isError={false}
+              isEmpty={true}
+              isCorrect={false}
+            />
+            <InputBox
+              helpText={helpText.password}
+              placeholderText={placeholderText.password}
+              isError={false}
+              isEmpty={true}
+              isCorrect={false}
+            />
+            <InputBox
+              helpText={helpText.email}
+              placeholderText={placeholderText.email}
+              isError={false}
+              isEmpty={true}
+              isCorrect={false}
+            />
           </InputContainer>
         </SignupContainer>
 
@@ -95,7 +126,7 @@ const Signup = ({ isActive, text }) => {
             </AgreePageText>
           </AgreePageBox>
         </AgreeContainer>
-        <LargeButton isActive={true} text="완료하기"></LargeButton>
+        <LargeButton isActive={false} text="완료하기"></LargeButton>
       </All>
     </>
   );
@@ -136,7 +167,7 @@ const AgreeContainer = styled.div`
   flex-direction: column;
   width: 1166px;
   height: 410px;
-  margin-bottom: 115px;
+  margin-bottom: 114px;
 `;
 
 const AgreeCheckContainer = styled.div`
@@ -183,23 +214,28 @@ const AgreeCheckIcon = styled.img`
 `;
 
 const AgreePageBox = styled.div`
+  display: flex;
+  justify-content: center;
   width: 1113px;
   height: 342px;
   border: 2px solid #717171;
   border-radius: 25px;
   padding: 19px 24px 19px 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const AgreePageText = styled.div`
-  display: flex;
-  justify-content: center;
   width: 1080px;
   height: 304px;
   font-size: 16px;
   line-height: 22px;
   white-space: pre-line;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 37px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.colors.GRAY}; /* 스크롤바 막대 색상 */
+    border-radius: 99px;
+  }
 `;

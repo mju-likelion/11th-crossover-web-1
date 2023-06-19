@@ -14,7 +14,7 @@ const Button = styled.button`
   width: 540px;
   height: 90px;
   background-color: ${(props) =>
-    props.isActive ? props.theme.colors.BLUE1 : props.theme.colors.BLUE2};
+    props.isActive ? props.theme.colors.BLUE2 : props.theme.colors.BLUE1};
   border-radius: 25px;
   color: #ffffff;
   font-size: 36px;
