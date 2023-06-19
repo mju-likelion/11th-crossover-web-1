@@ -1,16 +1,14 @@
 import styled from "styled-components";
 
-const SigningButton = ({ text, disabled, clickEvent }) => {
+const LargeButton = ({ text, isActive, clickEvent }) => {
   return (
-    <>
-      <Button disabled={disabled} clickEvent={clickEvent}>
-        {text}
-      </Button>
-    </>
+    <Button isActive={isActive} clickEvent={clickEvent}>
+      {text}
+    </Button>
   );
 };
 
-export default SigningButton;
+export default LargeButton;
 
 const Button = styled.button`
   width: 540px;

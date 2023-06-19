@@ -1,12 +1,10 @@
 import styled from "styled-components";
 
-const SmallButton = ({ text, disabled, clickEvent }) => {
+const SmallButton = ({ text, isActive, clickEvent }) => {
   return (
-    <>
-      <Button disabled={disabled} clickEvent={clickEvent}>
-        {text}
-      </Button>
-    </>
+    <Button isActive={isActive} clickEvent={clickEvent}>
+      {text}
+    </Button>
   );
 };
 

@@ -1,10 +1,12 @@
 import { styled } from "styled-components";
-import SigningButton from "../../components/SigningButton";
+import LargeButton from "../../components/LargeButton";
+import Header from "../../components/Header";
+import InputBox from "../../components/InputBox";
 
 const Signup = ({ isActive, text }) => {
   return (
     <>
-      {/* header */}
+      <Header />
       <All>
         <SignupContainer>
           <SignupTitle>회원가입</SignupTitle>
@@ -93,7 +95,7 @@ const Signup = ({ isActive, text }) => {
             </AgreePageText>
           </AgreePageBox>
         </AgreeContainer>
-        <SigningButton isActive={true} text="완료하기"></SigningButton>
+        <LargeButton isActive={true} text="완료하기"></LargeButton>
       </All>
     </>
   );
@@ -186,6 +188,9 @@ const AgreePageBox = styled.div`
   border: 2px solid #717171;
   border-radius: 25px;
   padding: 19px 24px 19px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const AgreePageText = styled.div`
