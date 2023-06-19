@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-const SigningButton = ({ text, isActive }) => {
+const SigningButton = ({ text, disabled, clickEvent }) => {
   return (
     <>
-      <Button isActive={isActive}>{text}</Button>
+      <Button disabled={disabled} clickEvent={clickEvent}>
+        {text}
+      </Button>
     </>
   );
 };
