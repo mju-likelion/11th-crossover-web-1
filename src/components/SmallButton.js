@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const SmallButton = ({ text, disabled }) => {
+const SmallButton = ({ text, isActive }) => {
   return (
     <>
-      <Button disabled={disabled}>{text}</Button>
+      <Button isActive={isActive}>{text}</Button>
     </>
   );
 };
@@ -14,7 +14,7 @@ const Button = styled.button`
   width: 233px;
   height: 70px;
   background-color: ${(props) =>
-    props.disabled ? props.theme.colors.BLUE1 : props.theme.colors.BLUE2};
+    props.isActive ? props.theme.colors.BLUE1 : props.theme.colors.BLUE2};
   border-radius: 25px;
   color: #ffffff;
   font-size: 21px;

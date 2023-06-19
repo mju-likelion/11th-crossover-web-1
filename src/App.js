@@ -4,11 +4,14 @@ import { Theme } from "./styles/Theme";
 import SmallButton from "./components/SmallButton";
 import { ThemeProvider } from "styled-components";
 import SigningButton from "./components/SigningButton";
+import Signup from "./pages/join/Signup";
+
 function App() {
   return (
     <ThemeProvider theme={Theme}>
-      <SigningButton text="" disabled={true} />
-      <SmallButton text="" disabled={true} />
+      {/* <SigningButton text="" isActive={true} />
+      <SmallButton text="" isActive={true} /> */}
+      <Signup></Signup>
     </ThemeProvider>
   );
 }
