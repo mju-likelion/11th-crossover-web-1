@@ -12,13 +12,20 @@ const InputBox = ({
   isEmpty,
   isCorrect,
   inputEvent,
+  passwordType,
+  data,
+  clickEvent,
 }) => {
   /* helpText는 Input 박스 밑의 도움말 내용,
   placeholderText는 placeholder의 내용,
   isError는 로그인 버튼을 눌렀을 때 조건에 맞지 않다면 true,
   isEmpty는 Input에 아무런 값이 없을 경우 true,
   isCorrect는 유효성 검사를 통과할 경우 true 입니다.
-  inputEvent는 해당 Input에 적용할 이벤트 입니다.*/
+  inputEvent는 해당 Input에 적용할 이벤트 입니다.
+  passwordType은 해당 Input의 type이 password 일 경우 true 입니다.
+  data는 input의 value로 설정할 값,
+  clickEvent는 클릭 시 적용할 이벤트 입니다(이미지 클릭 등).
+  */
 
   /*
   로그인과 회원가입 코드에서 쓸 placeholder와 helper Text 내용물 코드
@@ -52,14 +59,27 @@ const InputBox = ({
             placeholder={placeholderText}
             isError={isError}
             isCorrect={isCorrect}
+            onChange={(e) => {
+              inputEvent(e);
+            }}
+            type={passwordType ? "password" : "text"}
+            value={data}
           ></Input>
           <ImgArea>
             <ColoredImg
               src={isCorrect ? success_img : error_img}
               alt="coloredIcon_image"
-              isEmpty={isEmpty}
+              isError={isError}
             />
-            <CancelImg src={cancel_img} isEmpty={isEmpty} />
+            {isEmpty || (
+              <CancelImg
+                src={cancel_img}
+                alt="cancel_image"
+                onClick={(e) => {
+                  clickEvent(e);
+                }}
+              />
+            )}
           </ImgArea>
         </InputTextBox>
         <HelperTextArea
@@ -78,6 +98,7 @@ const InputBox = ({
 const InputArea = styled.div`
   width: 540px;
   height: 124px;
+  margin-bottom: 16px;
 `;
 
 const InputTextBox = styled.div`
@@ -85,7 +106,7 @@ const InputTextBox = styled.div`
   height: 90px;
   padding: 29px, 27px;
   border-radius: 25px;
-  border: 2px solid
+  border: 1px solid
     ${({ isError, isCorrect, theme }) =>
       isCorrect
         ? theme.colors.GREEN
@@ -116,12 +137,13 @@ const ImgArea = styled.div`
 `;
 
 const ColoredImg = styled.img`
-  display: ${({ isEmpty }) => (isEmpty ? "none" : "block")};
+  display: ${({ isError }) => (isError ? "block" : "none")};
+  margin-right: 5px;
 `;
 
 const CancelImg = styled.img`
-  margin-left: 5px;
-  display: ${({ isEmpty }) => (isEmpty ? "none" : "block")};
+  display: flex;
+  margin-left: auto;
 `;
 
 const HelperTextArea = styled.div`
@@ -136,8 +158,8 @@ const HelperTextArea = styled.div`
       : isError
       ? theme.colors.RED
       : theme.colors.GRAY};
-  display: ${({ isEmpty }) => (isEmpty ? "block" : "none")};
-  margin-top: 10px;
+  display: ${({ isError, isEmpty }) => (isError || isEmpty ? "block" : "none")};
+  margin: 10px 22.5px 0px 22.5px;
 `;
 
 export default InputBox;
