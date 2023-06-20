@@ -2,8 +2,32 @@ import { styled } from "styled-components";
 import LargeButton from "../../components/LargeButton";
 import Header from "../../components/Header";
 import InputBox from "../../components/InputBox";
+import { useState, useEffect } from "react";
+import checkBox from "../../assets/images/icon_checkbox.svg";
+import fullCheckBox from "../../assets/images/icon_fullcheckbox.svg";
 
-const Signup = ({ isActive, text, isError, isEmpty, isCorrect }) => {
+const Signup = () => {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [isIdError, setIsIdError] = useState(false);
+  const [isPasswordError, setIsPasswordError] = useState(false);
+  const [isEmailError, setIsEmailError] = useState(false);
+  const [isIdEmpty, setIsIdEmpty] = useState(true);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
+  const [isEmailEmpty, setIsEmailEmpty] = useState(true);
+  const [isIdCorrect, setIsIdCorrect] = useState(false);
+  const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
+  const [isEmailCorrect, setIsEmailCorrect] = useState(false);
+  //   const [disabled, setDisabled] = useState(true);
+
+  const [isCheck, setIsCheck] = useState(false);
+
+  const checkToggle = () => {
+    setIsCheck((prev) => !prev);
+  };
+
   const placeholderText = {
     id: "아이디",
     password: "비밀번호",
@@ -17,33 +41,146 @@ const Signup = ({ isActive, text, isError, isEmpty, isCorrect }) => {
     email: "사용하실 이메일을 입력해주세요.",
   };
 
+  const failText = {
+    id: "사용하실 수 없는 아이디 입니다.",
+    password: "사용하실 수 없는 비밀번호 입니다.",
+    email: "이메일 형식에 맞지 않습니다.",
+  };
+
+  const successText = {
+    id: "사용 가능한 아이디 입니다.",
+    password: "사용 가능한 비밀번호 입니다.",
+    email: "사용 가능한 이메일 입니다.",
+  };
+
+  const [idMessage, setIdMessage] = useState(helpText.id);
+  const [passwordMessage, setPasswordMessage] = useState(helpText.password);
+  const [emailMessage, setEmailMessage] = useState(helpText.email);
+
+  const onChangeId = (e) => {
+    const currentId = e.target.value;
+    setId(currentId);
+    const checkId = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,9}$/;
+
+    if (checkId.test(currentId)) {
+      setIsIdError(true);
+      setIsIdEmpty(false);
+      setIsIdCorrect(true);
+      setIdMessage(successText.id);
+    } else {
+      setIsIdError(true);
+      setIsIdEmpty(false);
+      setIsIdCorrect(false);
+      setIdMessage(failText.id);
+    }
+  };
+
+  const onChangePassword = (e) => {
+    const currentPassword = e.target.value;
+    setPassword(currentPassword);
+
+    const checkPassword =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,13}$/;
+    if (checkPassword.test(currentPassword)) {
+      setIsPasswordError(true);
+      setIsPasswordEmpty(false);
+      setIsPasswordCorrect(true);
+      setPasswordMessage(successText.password);
+    } else {
+      setIsPasswordError(true);
+      setIsPasswordEmpty(false);
+      setIsPasswordCorrect(false);
+      setPasswordMessage(failText.password);
+    }
+  };
+
+  const onChangeEmail = (e) => {
+    const currentEmail = e.target.value;
+    setEmail(currentEmail);
+
+    const checkEmail =
+      /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
+
+    if (checkEmail.test(currentEmail)) {
+      setIsEmailError(true);
+      setIsEmailEmpty(false);
+      setIsEmailCorrect(true);
+      setEmailMessage(successText.email);
+    } else {
+      setIsEmailError(true);
+      setIsEmailEmpty(false);
+      setIsEmailCorrect(false);
+      setEmailMessage(failText.email);
+    }
+  };
+
+  const clearId = (e) => {
+    setId("");
+    setIsIdEmpty(true);
+    setIsIdError(false);
+    setIdMessage(helpText.id);
+    setIsIdCorrect(false);
+  };
+
+  const clearPassword = (e) => {
+    setPassword("");
+    setIsPasswordEmpty(true);
+    setIsPasswordError(false);
+    setPasswordMessage(helpText.password);
+    setIsPasswordCorrect(false);
+  };
+
+  const clearEmail = (e) => {
+    setEmail("");
+    setIsEmailEmpty(true);
+    setIsEmailError(false);
+    setEmailMessage(helpText.email);
+    setIsEmailCorrect(false);
+  };
+
+  //   useEffect(() => {
+  //     (id && password && email) !== "" ? setDisabled(false) : setDisabled(true);
+  //   }, [id, password, email]);
+
   return (
     <>
-      <Header />
-      <All>
+      <Header isVisible={false} />
+      <SignupPageArea>
         <SignupContainer>
           <SignupTitle>회원가입</SignupTitle>
           <InputContainer>
             <InputBox
-              helpText={helpText.id}
+              helpText={idMessage}
               placeholderText={placeholderText.id}
-              isError={false}
-              isEmpty={true}
-              isCorrect={false}
+              isError={isIdError}
+              isEmpty={isIdEmpty}
+              isCorrect={isIdCorrect}
+              inputEvent={(e) => onChangeId(e)}
+              passwordType={false}
+              data={id}
+              clickEvent={(e) => clearId(e)}
             />
             <InputBox
-              helpText={helpText.password}
+              helpText={passwordMessage}
               placeholderText={placeholderText.password}
-              isError={false}
-              isEmpty={true}
-              isCorrect={false}
+              isError={isPasswordError}
+              isEmpty={isPasswordEmpty}
+              isCorrect={isPasswordCorrect}
+              inputEvent={(e) => onChangePassword(e)}
+              passwordType={true}
+              data={password}
+              clickEvent={(e) => clearPassword(e)}
             />
             <InputBox
-              helpText={helpText.email}
+              helpText={emailMessage}
               placeholderText={placeholderText.email}
-              isError={false}
-              isEmpty={true}
-              isCorrect={false}
+              isError={isEmailError}
+              isEmpty={isEmailEmpty}
+              isCorrect={isEmailCorrect}
+              inputEvent={(e) => onChangeEmail(e)}
+              passwordType={false}
+              data={email}
+              clickEvent={(e) => clearEmail(e)}
             />
           </InputContainer>
         </SignupContainer>
@@ -56,7 +193,11 @@ const Signup = ({ isActive, text, isError, isEmpty, isCorrect }) => {
             </AgreeExplainBox>
             <AgreeCheckBox>
               <AgreeCheckText>약관동의</AgreeCheckText>
-              <AgreeCheckIcon></AgreeCheckIcon>
+              <AgreeCheckIcon
+                onClick={checkToggle}
+                src={isCheck ? fullCheckBox : checkBox}
+                alt="checkBox"
+              />
             </AgreeCheckBox>
           </AgreeCheckContainer>
           <AgreePageBox>
@@ -126,15 +267,18 @@ const Signup = ({ isActive, text, isError, isEmpty, isCorrect }) => {
             </AgreePageText>
           </AgreePageBox>
         </AgreeContainer>
-        <LargeButton isActive={false} text="완료하기"></LargeButton>
-      </All>
+        <LargeButton
+          isActive={id && password && email && isCheck}
+          text={"완료하기"}
+        ></LargeButton>
+      </SignupPageArea>
     </>
   );
 };
 
 export default Signup;
 
-const All = styled.div`
+const SignupPageArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,7 +311,7 @@ const AgreeContainer = styled.div`
   flex-direction: column;
   width: 1166px;
   height: 410px;
-  margin-bottom: 114px;
+  margin-bottom: 115px;
 `;
 
 const AgreeCheckContainer = styled.div`
@@ -198,7 +342,7 @@ const AgreeCheckBox = styled.div`
   width: 112px;
   height: 32px;
   display: flex;
-  flex-direction: row;
+  align-items: center;
 `;
 
 const AgreeCheckText = styled.div`
@@ -221,6 +365,7 @@ const AgreePageBox = styled.div`
   border: 2px solid #717171;
   border-radius: 25px;
   padding: 19px 24px 19px 30px;
+  margin-top: 12px;
 `;
 
 const AgreePageText = styled.div`
@@ -229,7 +374,7 @@ const AgreePageText = styled.div`
   font-size: 16px;
   line-height: 22px;
   white-space: pre-line;
-  overflow: scroll;
+  overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 5px;
     height: 37px;
