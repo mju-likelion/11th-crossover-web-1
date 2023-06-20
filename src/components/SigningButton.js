@@ -3,7 +3,12 @@ import styled from "styled-components";
 const SigningButton = ({ text, disabled, clickEvent }) => {
   return (
     <>
-      <Button disabled={disabled} clickEvent={clickEvent}>
+      <Button
+        disabled={disabled}
+        onClick={(e) => {
+          clickEvent(e);
+        }}
+      >
         {text}
       </Button>
     </>
