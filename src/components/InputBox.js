@@ -72,7 +72,7 @@ const InputBox = ({
               isError={isError}
             />
             {isEmpty || (
-              <img
+              <CancelImg
                 src={cancel_img}
                 alt="cancel_image"
                 onClick={(e) => {
@@ -98,6 +98,7 @@ const InputBox = ({
 const InputArea = styled.div`
   width: 540px;
   height: 124px;
+  margin-bottom: 16px;
 `;
 
 const InputTextBox = styled.div`
@@ -140,6 +141,11 @@ const ColoredImg = styled.img`
   margin-right: 5px;
 `;
 
+const CancelImg = styled.img`
+  display: flex;
+  margin-left: auto;
+`;
+
 const HelperTextArea = styled.div`
   width: 495px;
   height: 19px;
@@ -153,7 +159,7 @@ const HelperTextArea = styled.div`
       ? theme.colors.RED
       : theme.colors.GRAY};
   display: ${({ isError, isEmpty }) => (isError || isEmpty ? "block" : "none")};
-  margin-top: 10px;
+  margin: 10px 22.5px 0px 22.5px;
 `;
 
 export default InputBox;

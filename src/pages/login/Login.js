@@ -41,13 +41,11 @@ const Login = () => {
 
   const onChangeId = (e) => {
     setId(e.target.value);
-    console.log(id);
     e.target.value === "" ? setIsIdEmpty(true) : setIsIdEmpty(false);
   };
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
-    console.log(password);
     e.target.value === ""
       ? setIsPasswordEmpty(true)
       : setIsPasswordEmpty(false);
@@ -55,10 +53,16 @@ const Login = () => {
 
   const clearId = (e) => {
     setId("");
+    setIsIdEmpty(true);
+    setIsIdError(false);
+    setIdMessage(helpText.id);
   };
 
   const clearPassword = (e) => {
     setPassword("");
+    setIsPasswordEmpty(true);
+    setIsPasswordError(false);
+    setPasswordMessage(helpText.password);
   };
 
   const checkContents = (e) => {
@@ -90,46 +94,66 @@ const Login = () => {
   return (
     <>
       <Header isVisible={false} />
-      <LoginContentArea>
-        <LoginTitle>로그인</LoginTitle>
-        <InputBox
-          helpText={idMessage}
-          placeholderText={placeholderText.id}
-          isError={isIdError}
-          isEmpty={isIdEmpty}
-          isCorrect={isCorrect}
-          passwordType={false}
-          inputEvent={(e) => onChangeId(e)}
-          data={id}
-          clickEvent={(e) => clearId(e)}
-        />
-        <InputBox
-          helpText={passwordMessage}
-          placeholderText={placeholderText.password}
-          isError={isPasswordError}
-          isEmpty={isPasswordEmpty}
-          isCorrect={isCorrect}
-          passwordType={true}
-          inputEvent={(e) => onChangePassword(e)}
-          data={password}
-          clickEvent={(e) => clearPassword(e)}
-        />
-        <SigningButton
-          disabled={disabled}
-          text={"로그인"}
-          clickEvent={checkContents}
-        />
-      </LoginContentArea>
+      <LoginPageArea>
+        <LoginContentArea>
+          <LoginTitle>로그인</LoginTitle>
+          <InputBox
+            helpText={idMessage}
+            placeholderText={placeholderText.id}
+            isError={isIdError}
+            isEmpty={isIdEmpty}
+            isCorrect={isCorrect}
+            passwordType={false}
+            inputEvent={(e) => onChangeId(e)}
+            data={id}
+            clickEvent={(e) => clearId(e)}
+          />
+          <InputBox
+            helpText={passwordMessage}
+            placeholderText={placeholderText.password}
+            isError={isPasswordError}
+            isEmpty={isPasswordEmpty}
+            isCorrect={isCorrect}
+            passwordType={true}
+            inputEvent={(e) => onChangePassword(e)}
+            data={password}
+            clickEvent={(e) => clearPassword(e)}
+          />
+          <ButtonArea>
+            <SigningButton
+              disabled={disabled}
+              text={"로그인"}
+              clickEvent={checkContents}
+            />
+          </ButtonArea>
+          <JoinLink
+            onClick={(e) => {
+              navigate("/join");
+            }}
+          >
+            회원가입
+          </JoinLink>
+        </LoginContentArea>
+      </LoginPageArea>
     </>
   );
 };
 
-const LoginContentArea = styled.div`
+const LoginPageArea = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LoginContentArea = styled.div`
+  width: 540px;
+  height: 606px;
+  display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 114px;
 `;
 
 const LoginTitle = styled.div`
@@ -138,6 +162,26 @@ const LoginTitle = styled.div`
   font-size: 50px;
   font-weight: 600;
   text-align: center;
+  margin-bottom: 65px;
+`;
+
+const ButtonArea = styled.div`
+  width: 540px;
+  height: 90px;
+  margin-top: 61px;
+`;
+
+const JoinLink = styled.div`
+  width: 88px;
+  height: 30px;
+  display: flex;
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  color: ${({ theme }) => theme.colors.GRAY};
+  margin-top: 31px;
 `;
 
 export default Login;
