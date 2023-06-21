@@ -1,20 +1,20 @@
 import styled from "styled-components";
 
-const SigningButton = ({ text, disabled }) => {
+const LargeButton = ({ text, isActive, clickEvent }) => {
   return (
-    <>
-      <Button disabled={disabled}>{text}</Button>
-    </>
+    <Button isActive={isActive} clickEvent={clickEvent}>
+      {text}
+    </Button>
   );
 };
 
-export default SigningButton;
+export default LargeButton;
 
 const Button = styled.button`
   width: 540px;
   height: 90px;
   background-color: ${(props) =>
-    props.disabled ? props.theme.colors.BLUE1 : props.theme.colors.BLUE2};
+    props.isActive ? props.theme.colors.BLUE2 : props.theme.colors.BLUE1};
   border-radius: 25px;
   color: #ffffff;
   font-size: 36px;
