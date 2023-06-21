@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const SmallButton = ({ text, isActive, clickEvent }) => {
+const SmallButton = ({ text, isActive, clickEvent, type }) => {
   return (
-    <Button isActive={isActive} clickEvent={clickEvent}>
+    <Button type={type} isActive={isActive} clickEvent={clickEvent}>
       {text}
     </Button>
   );
@@ -14,7 +14,11 @@ const Button = styled.button`
   width: 233px;
   height: 70px;
   background-color: ${(props) =>
-    props.isActive ? theme.colors.BLUE2 : theme.colors.BLUE1};
+    props.type === "black"
+      ? props.theme.colors.GRAY
+      : props.isActive
+      ? props.theme.colors.BLUE2
+      : props.theme.colors.BLUE1};
   border-radius: 25px;
   color: #ffffff;
   font-size: 21px;
