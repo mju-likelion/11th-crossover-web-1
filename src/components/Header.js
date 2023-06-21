@@ -2,13 +2,17 @@ import React from "react";
 import plane_img from "../assets/images/icon_airplane.svg";
 import logout_img from "../assets/images/icon_logout.svg";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // 하단 border, isVisible props 추가
 const Header = ({ isVisible }) => {
   //로그인과 회원가입에서는 로그아웃 버튼이 나올 필요가 없으르모 isVisible=false로 놓으면 됩니다.
+
+  const navigate = useNavigate();
+
   return (
     <HeaderTopArea>
-      <HeaderTitleBox>
+      <HeaderTitleBox onClick={(e) => navigate("/")}>
         <HeaderTitle>비행기레터</HeaderTitle>
         <img src={plane_img} alt="plane_image" />
       </HeaderTitleBox>
@@ -33,6 +37,7 @@ const HeaderTitleBox = styled.div`
   height: 34px;
   color: ${({ theme }) => theme.colors.BLUE2};
   display: flex;
+  cursor: pointer;
 `;
 
 const HeaderTitle = styled.div`

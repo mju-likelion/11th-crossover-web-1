@@ -87,9 +87,9 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     (id && password) !== "" ? setDisabled(false) : setDisabled(true);
-  }, [id, password]);
+  }, [id, password]);*/
 
   return (
     <>
@@ -121,7 +121,7 @@ const Login = () => {
           />
           <ButtonArea>
             <SigningButton
-              disabled={disabled}
+              disabled={!(id && password)}
               text={"로그인"}
               clickEvent={checkContents}
             />
