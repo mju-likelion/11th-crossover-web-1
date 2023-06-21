@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import Header from "../../components/Header";
 import InputBox from "../../components/InputBox";
 import LargeButton from "../../components/LargeButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -14,7 +14,6 @@ const Login = () => {
   const [isIdEmpty, setIsIdEmpty] = useState(true);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
   const [isCorrect] = useState(false);
-  // const [disabled, setDisabled] = useState(true);
 
   const navigate = useNavigate();
 
@@ -87,10 +86,6 @@ const Login = () => {
     }
   };
 
-  // useEffect(() => {
-  //   (id && password) !== "" ? setDisabled(false) : setDisabled(true);
-  // }, [id, password]);
-
   return (
     <>
       <Header isVisible={false} />
@@ -121,14 +116,13 @@ const Login = () => {
           />
           <ButtonArea>
             <LargeButton
-              // disabled={disabled}
               isActive={id && password}
               text={"로그인"}
               clickEvent={checkContents}
             />
           </ButtonArea>
           <JoinLink
-            onClick={(e) => {
+            onClick={() => {
               navigate("/join");
             }}
           >

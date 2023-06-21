@@ -2,7 +2,13 @@ import styled from "styled-components";
 
 const SmallButton = ({ text, isActive, clickEvent, type }) => {
   return (
-    <Button type={type} isActive={isActive} clickEvent={clickEvent}>
+    <Button
+      type={type}
+      isActive={isActive}
+      onClick={(e) => {
+        clickEvent(e);
+      }}
+    >
       {text}
     </Button>
   );
