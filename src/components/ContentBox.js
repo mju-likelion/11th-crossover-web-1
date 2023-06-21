@@ -3,7 +3,7 @@ import colorProfile_img from "../assets/images/icon_colorProfile.svg";
 import defaultProfile_img from "../assets/images/icon_defaultProfile.svg";
 import { useNavigate } from "react-router-dom";
 
-const ContentBox = ({ id, isMine, title, detail, time }) => {
+const ContentBox = ({ id, dataContents }) => {
   /*
         id는 해당 작성글의 고유 id,
         isMine은 해당 내용이 본인이 작성한 것이면 true,
@@ -13,17 +13,20 @@ const ContentBox = ({ id, isMine, title, detail, time }) => {
     */
 
   const navigate = useNavigate();
+
   return (
     <>
-      <ContentArea onClick={(e) => navigate(`/${id}`)}>
-        <ProfileImg src={isMine ? colorProfile_img : defaultProfile_img} />
+      <ContentArea onClick={() => navigate(`/${id}`)}>
+        <ProfileImg
+          src={dataContents.isMine ? colorProfile_img : defaultProfile_img}
+        />
         <DetailArea>
-          <TitleArea>제목 : {title}</TitleArea>
+          <TitleArea>제목 : {dataContents.title}</TitleArea>
           <DetailBox>
-            <DetailContent>{detail}</DetailContent>
+            <DetailContent>{dataContents.detail}</DetailContent>
           </DetailBox>
           <TimeArea>
-            <TimeBox>{time}</TimeBox>
+            <TimeBox>{dataContents.time}</TimeBox>
           </TimeArea>
         </DetailArea>
       </ContentArea>
@@ -35,7 +38,7 @@ const ContentArea = styled.div`
   width: 783px;
   height: 343px;
   border-radius: 25px;
-  padding: 24px 40px 24px 40px;
+  padding: 24px 40px;
   border: 2px solid ${({ theme }) => theme.colors.GRAY};
   box-sizing: border-box;
   cursor: pointer;
@@ -53,7 +56,7 @@ const DetailArea = styled.div`
   width: 598px;
   height: 239px;
   margin-top: 20px;
-  margin-left: 41.58px;
+  margin-left: 41px;
 `;
 
 const TitleArea = styled.div`

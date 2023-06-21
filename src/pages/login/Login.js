@@ -14,7 +14,6 @@ const Login = () => {
   const [isIdEmpty, setIsIdEmpty] = useState(true);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
   const [isCorrect] = useState(false);
-  // const [disabled, setDisabled] = useState(true);
 
   const navigate = useNavigate();
 
@@ -117,14 +116,13 @@ const Login = () => {
           />
           <ButtonArea>
             <LargeButton
-              // disabled={disabled}
               isActive={id && password}
               text={"로그인"}
               clickEvent={checkContents}
             />
           </ButtonArea>
           <JoinLink
-            onClick={(e) => {
+            onClick={() => {
               navigate("/join");
             }}
           >

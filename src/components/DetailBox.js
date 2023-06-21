@@ -22,7 +22,7 @@ const DetailBox = ({ isWrite }) => {
   };
 
   useEffect(() => {
-    (title && detail) !== "" ? setIsActive(true) : setIsActive(false);
+    title && detail ? setIsActive(true) : setIsActive(false);
   }, [title, detail]);
 
   return (

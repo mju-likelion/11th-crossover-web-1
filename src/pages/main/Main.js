@@ -6,6 +6,29 @@ import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const navigate = useNavigate();
+  const dataContents = [
+    {
+      id: "0",
+      isMine: false,
+      title: "title1",
+      detail: "text1",
+      time: "15:20",
+    },
+    {
+      id: "1",
+      isMine: false,
+      title: "title2",
+      detail: "text2",
+      time: "14:30",
+    },
+    {
+      id: "2",
+      isMine: true,
+      title: "title3",
+      detail: "text3",
+      time: "11:24",
+    },
+  ];
 
   return (
     <>
@@ -16,31 +39,13 @@ const Main = () => {
             <SmallButton
               isActive={true}
               text={"작성하기"}
-              clickEvent={(e) => navigate("/write")}
+              clickEvent={() => navigate("/write")}
             />
           </ButtonArea>
           <DetailArea>
-            <ContentBox
-              id={0}
-              isMine={true}
-              title="text"
-              detail="text"
-              time="00:00"
-            />
-            <ContentBox
-              id={1}
-              isMine={false}
-              title="text"
-              detail="text"
-              time="00:00"
-            />
-            <ContentBox
-              id={2}
-              isMine={true}
-              title="text"
-              detail="text"
-              time="00:00"
-            />
+            {dataContents.map((item, idx) => (
+              <ContentBox key={item.id} id={idx} dataContents={item} />
+            ))}
           </DetailArea>
         </ContentArea>
       </MainPageArea>
