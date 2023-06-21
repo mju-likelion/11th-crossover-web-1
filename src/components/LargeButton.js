@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const LargeButton = ({ text, isActive, clickEvent }) => {
   return (
-    <Button isActive={isActive} clickEvent={clickEvent}>
+    <Button isActive={isActive} onClick={(e) => clickEvent(e)}>
       {text}
     </Button>
   );

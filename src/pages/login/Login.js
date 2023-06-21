@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import Header from "../../components/Header";
 import InputBox from "../../components/InputBox";
 import LargeButton from "../../components/LargeButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -86,10 +86,6 @@ const Login = () => {
       navigate("/");
     }
   };
-
-  // useEffect(() => {
-  //   (id && password) !== "" ? setDisabled(false) : setDisabled(true);
-  // }, [id, password]);
 
   return (
     <>

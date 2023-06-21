@@ -14,7 +14,7 @@ const Main = () => {
         <ContentArea>
           <ButtonArea>
             <SmallButton
-              disabled={false}
+              isActive={true}
               text={"작성하기"}
               clickEvent={(e) => navigate("/write")}
             />

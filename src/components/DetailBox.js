@@ -9,7 +9,7 @@ const DetailBox = ({ isWrite }) => {
   const [detail, setDetail] = useState("");
   const [detailCount, setDetailCount] = useState(0);
 
-  const [disabled, setDisabled] = useState(true);
+  const [isActive, setIsActive] = useState(false);
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -22,7 +22,7 @@ const DetailBox = ({ isWrite }) => {
   };
 
   useEffect(() => {
-    (title && detail) !== "" ? setDisabled(false) : setDisabled(true);
+    (title && detail) !== "" ? setIsActive(true) : setIsActive(false);
   }, [title, detail]);
 
   return (
@@ -59,8 +59,9 @@ const DetailBox = ({ isWrite }) => {
           <AlarmContent>※ 작성된 게시글은 수정이 불가합니다.</AlarmContent>
           <ButtonArea>
             <SmallButton
-              text={isWrite ? "작성하기" : "삭제하기"}
-              disabled={disabled}
+              type={isWrite ? "" : "black"}
+              text={!isWrite && "black"}
+              isActive={isActive}
             />
           </ButtonArea>
         </AlarmArea>
