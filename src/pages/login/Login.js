@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import Header from "../../components/Header";
 import InputBox from "../../components/InputBox";
-import SigningButton from "../../components/SigningButton";
+import LargeButton from "../../components/LargeButton";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ const Login = () => {
   const [isIdEmpty, setIsIdEmpty] = useState(true);
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
   const [isCorrect] = useState(false);
-  const [disabled, setDisabled] = useState(true);
+  // const [disabled, setDisabled] = useState(true);
 
   const navigate = useNavigate();
 
@@ -87,9 +87,9 @@ const Login = () => {
     }
   };
 
-  /*useEffect(() => {
-    (id && password) !== "" ? setDisabled(false) : setDisabled(true);
-  }, [id, password]);*/
+  // useEffect(() => {
+  //   (id && password) !== "" ? setDisabled(false) : setDisabled(true);
+  // }, [id, password]);
 
   return (
     <>
@@ -120,8 +120,9 @@ const Login = () => {
             clickEvent={(e) => clearPassword(e)}
           />
           <ButtonArea>
-            <SigningButton
-              disabled={!(id && password)}
+            <LargeButton
+              // disabled={disabled}
+              isActive={id && password}
               text={"로그인"}
               clickEvent={checkContents}
             />
