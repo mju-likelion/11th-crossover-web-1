@@ -47,7 +47,6 @@ const Signup = () => {
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
   const [isEmailCorrect, setIsEmailCorrect] = useState(false);
   //   const [disabled, setDisabled] = useState(true);
-
   const [isCheck, setIsCheck] = useState(false);
 
   const checkToggle = () => {
@@ -115,7 +114,7 @@ const Signup = () => {
     }
   };
 
-  const clearId = (e) => {
+  const clearId = () => {
     setId("");
     setIsIdEmpty(true);
     setIsIdError(false);
@@ -123,7 +122,7 @@ const Signup = () => {
     setIsIdCorrect(false);
   };
 
-  const clearPassword = (e) => {
+  const clearPassword = () => {
     setPassword("");
     setIsPasswordEmpty(true);
     setIsPasswordError(false);
@@ -131,17 +130,13 @@ const Signup = () => {
     setIsPasswordCorrect(false);
   };
 
-  const clearEmail = (e) => {
+  const clearEmail = () => {
     setEmail("");
     setIsEmailEmpty(true);
     setIsEmailError(false);
     setEmailMessage(HELP_TEXT.email);
     setIsEmailCorrect(false);
   };
-
-  //   useEffect(() => {
-  //     (id && password && email) !== "" ? setDisabled(false) : setDisabled(true);
-  //   }, [id, password, email]);
 
   return (
     <>
@@ -237,6 +232,7 @@ const SignupTitle = styled.div`
   font-size: 54px;
   display: flex;
   justify-content: center;
+  margin: 145px 0px 65px 0px;
 `;
 
 const InputContainer = styled.div`
@@ -249,14 +245,14 @@ const AgreeContainer = styled.div`
   flex-direction: column;
   width: 1166px;
   height: 410px;
+  margin-top: 57px;
   margin-bottom: 115px;
 `;
 
 const AgreeCheckContainer = styled.div`
-  width: 1113px;
+  width: 1166px;
   height: 24px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   margin-bottom: 10px;
 `;
@@ -287,7 +283,6 @@ const AgreeCheckText = styled.div`
   width: 74px;
   height: 24px;
   font-size: 20px;
-  margin-left: 10px;
 `;
 
 const AgreeCheckIcon = styled.img`
