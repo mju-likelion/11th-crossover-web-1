@@ -59,8 +59,8 @@ const DetailBox = ({ isWrite }) => {
           <AlarmContent>※ 작성된 게시글은 수정이 불가합니다.</AlarmContent>
           <ButtonArea>
             <SmallButton
-              type={isWrite ? "" : "black"}
-              text={!isWrite && "black"}
+              type={!isWrite && "black"}
+              text={isWrite ? "작성하기" : "삭제하기"}
               isActive={isActive}
             />
           </ButtonArea>
