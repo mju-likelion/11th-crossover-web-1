@@ -37,7 +37,7 @@ const DetailBox = ({ isWrite }) => {
               name="title"
               maxLength={20}
               value={title}
-              onChange={(e) => onChangeTitle(e)}
+              onChange={onChangeTitle}
             />
             <TitleCount>({titleCount} / 20)</TitleCount>
           </TitleContent>
@@ -50,7 +50,7 @@ const DetailBox = ({ isWrite }) => {
               name="detail"
               maxLength={140}
               value={detail}
-              onChange={(e) => onChangeDetail(e)}
+              onChange={onChangeDetail}
             />
           </DetailContent>
           <DetailCount>({detailCount} / 140)</DetailCount>
