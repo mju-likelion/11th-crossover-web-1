@@ -176,10 +176,10 @@ const Signup = () => {
               isError={isIdError}
               isEmpty={isIdEmpty}
               isCorrect={isIdCorrect}
-              inputEvent={(e) => onChangeId(e)}
+              inputEvent={onChangeId}
               passwordType={false}
               data={id}
-              clickEvent={() => clearId()}
+              clickEvent={clearId}
             />
             <InputBox
               helpText={passwordMessage}
@@ -187,10 +187,10 @@ const Signup = () => {
               isError={isPasswordError}
               isEmpty={isPasswordEmpty}
               isCorrect={isPasswordCorrect}
-              inputEvent={(e) => onChangePassword(e)}
+              inputEvent={onChangePassword}
               passwordType={true}
               data={password}
-              clickEvent={() => clearPassword()}
+              clickEvent={clearPassword}
             />
             <InputBox
               helpText={emailMessage}
@@ -198,10 +198,10 @@ const Signup = () => {
               isError={isEmailError}
               isEmpty={isEmailEmpty}
               isCorrect={isEmailCorrect}
-              inputEvent={(e) => onChangeEmail(e)}
+              inputEvent={onChangeEmail}
               passwordType={false}
               data={email}
-              clickEvent={() => clearEmail()}
+              clickEvent={clearEmail}
             />
           </InputContainer>
         </SignupContainer>

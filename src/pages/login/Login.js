@@ -102,9 +102,9 @@ const Login = () => {
             isEmpty={isIdEmpty}
             isCorrect={isCorrect}
             passwordType={false}
-            inputEvent={(e) => onChangeId(e)}
+            inputEvent={onChangeId}
             data={id}
-            clickEvent={() => clearId()}
+            clickEvent={clearId}
           />
           <InputBox
             helpText={passwordMessage}
@@ -113,9 +113,9 @@ const Login = () => {
             isEmpty={isPasswordEmpty}
             isCorrect={isCorrect}
             passwordType={true}
-            inputEvent={(e) => onChangePassword(e)}
+            inputEvent={onChangePassword}
             data={password}
-            clickEvent={() => clearPassword()}
+            clickEvent={clearPassword}
           />
           <ButtonArea>
             <LargeButton
