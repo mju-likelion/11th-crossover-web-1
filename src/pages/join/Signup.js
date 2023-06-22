@@ -6,6 +6,7 @@ import { useState } from "react";
 import checkBox from "../../assets/images/icon_checkbox.svg";
 import fullCheckBox from "../../assets/images/icon_fullcheckbox.svg";
 import { AGREE_PAGE_TEXT } from "../../assets/data/AgreePageText";
+import { useNavigate } from "react-router-dom";
 
 const PLACEHOLDER_TEXT = {
   id: "아이디",
@@ -14,10 +15,15 @@ const PLACEHOLDER_TEXT = {
 };
 
 const HELP_TEXT = {
-  id: "영문과 숫자을 조합하여 5~10글자 미만으로 입력하여 주세요.",
-  password:
-    "영문과 숫자, 특수기호를 조합하여 8~14 글자 미만으로 입력하여 주세요.",
+  id: "영문과 숫자를 조합하여 5 ~ 10 글자로 입력하여 주세요.",
+  password: "영문과 숫자,특수기호를 조합하여 8~14글자로 입력하여 주세요.",
   email: "사용하실 이메일을 입력해주세요.",
+};
+
+const SUCCESS_TEXT = {
+  id: "사용 가능한 아이디 입니다.",
+  password: "사용 가능한 비밀번호 입니다.",
+  email: "사용 가능한 이메일 입니다.",
 };
 
 const FAIL_TEXT = {
@@ -26,11 +32,21 @@ const FAIL_TEXT = {
   email: "이메일 형식에 맞지 않습니다.",
 };
 
-const SUCCESS_TEXT = {
-  id: "사용 가능한 아이디 입니다.",
-  password: "사용 가능한 비밀번호 입니다.",
-  email: "사용 가능한 이메일 입니다.",
-};
+const {
+  id: placeholderId,
+  password: placeholderPassword,
+  email: placeholderEmail,
+} = PLACEHOLDER_TEXT;
+
+const { id: helpId, password: helpPassword, email: helpEmail } = HELP_TEXT;
+
+const {
+  id: successId,
+  password: successPassword,
+  email: successEmail,
+} = SUCCESS_TEXT;
+
+const { id: failId, password: failPassword, email: failEmail } = FAIL_TEXT;
 
 const Signup = () => {
   const [id, setId] = useState("");
@@ -46,16 +62,25 @@ const Signup = () => {
   const [isIdCorrect, setIsIdCorrect] = useState(false);
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
   const [isEmailCorrect, setIsEmailCorrect] = useState(false);
-  //   const [disabled, setDisabled] = useState(true);
   const [isCheck, setIsCheck] = useState(false);
 
-  const checkToggle = () => {
+  const goLogin = useNavigate();
+
+  const handleCheck = () => {
     setIsCheck((prev) => !prev);
   };
 
-  const [idMessage, setIdMessage] = useState(HELP_TEXT.id);
-  const [passwordMessage, setPasswordMessage] = useState(HELP_TEXT.password);
-  const [emailMessage, setEmailMessage] = useState(HELP_TEXT.email);
+  const handleComplete = () => {
+    if (id && password && email && isCheck) {
+      goLogin("/login");
+    } else {
+      goLogin("/join");
+    }
+  };
+
+  const [idMessage, setIdMessage] = useState(helpId);
+  const [passwordMessage, setPasswordMessage] = useState(helpPassword);
+  const [emailMessage, setEmailMessage] = useState(helpEmail);
 
   const onChangeId = (e) => {
     const currentId = e.target.value;
@@ -66,12 +91,12 @@ const Signup = () => {
       setIsIdError(true);
       setIsIdEmpty(false);
       setIsIdCorrect(true);
-      setIdMessage(SUCCESS_TEXT.id);
+      setIdMessage(successId);
     } else {
       setIsIdError(true);
       setIsIdEmpty(false);
       setIsIdCorrect(false);
-      setIdMessage(FAIL_TEXT.id);
+      setIdMessage(failId);
     }
   };
 
@@ -85,12 +110,12 @@ const Signup = () => {
       setIsPasswordError(true);
       setIsPasswordEmpty(false);
       setIsPasswordCorrect(true);
-      setPasswordMessage(SUCCESS_TEXT.password);
+      setPasswordMessage(successPassword);
     } else {
       setIsPasswordError(true);
       setIsPasswordEmpty(false);
       setIsPasswordCorrect(false);
-      setPasswordMessage(FAIL_TEXT.password);
+      setPasswordMessage(failPassword);
     }
   };
 
@@ -105,12 +130,12 @@ const Signup = () => {
       setIsEmailError(true);
       setIsEmailEmpty(false);
       setIsEmailCorrect(true);
-      setEmailMessage(SUCCESS_TEXT.email);
+      setEmailMessage(successEmail);
     } else {
       setIsEmailError(true);
       setIsEmailEmpty(false);
       setIsEmailCorrect(false);
-      setEmailMessage(FAIL_TEXT.email);
+      setEmailMessage(failEmail);
     }
   };
 
@@ -118,7 +143,7 @@ const Signup = () => {
     setId("");
     setIsIdEmpty(true);
     setIsIdError(false);
-    setIdMessage(HELP_TEXT.id);
+    setIdMessage(helpId);
     setIsIdCorrect(false);
   };
 
@@ -126,7 +151,7 @@ const Signup = () => {
     setPassword("");
     setIsPasswordEmpty(true);
     setIsPasswordError(false);
-    setPasswordMessage(HELP_TEXT.password);
+    setPasswordMessage(helpPassword);
     setIsPasswordCorrect(false);
   };
 
@@ -134,7 +159,7 @@ const Signup = () => {
     setEmail("");
     setIsEmailEmpty(true);
     setIsEmailError(false);
-    setEmailMessage(HELP_TEXT.email);
+    setEmailMessage(helpEmail);
     setIsEmailCorrect(false);
   };
 
@@ -147,36 +172,36 @@ const Signup = () => {
           <InputContainer>
             <InputBox
               helpText={idMessage}
-              placeholderText={PLACEHOLDER_TEXT.id}
+              placeholderText={placeholderId}
               isError={isIdError}
               isEmpty={isIdEmpty}
               isCorrect={isIdCorrect}
               inputEvent={(e) => onChangeId(e)}
               passwordType={false}
               data={id}
-              clickEvent={(e) => clearId(e)}
+              clickEvent={() => clearId()}
             />
             <InputBox
               helpText={passwordMessage}
-              placeholderText={PLACEHOLDER_TEXT.password}
+              placeholderText={placeholderPassword}
               isError={isPasswordError}
               isEmpty={isPasswordEmpty}
               isCorrect={isPasswordCorrect}
               inputEvent={(e) => onChangePassword(e)}
               passwordType={true}
               data={password}
-              clickEvent={(e) => clearPassword(e)}
+              clickEvent={() => clearPassword()}
             />
             <InputBox
               helpText={emailMessage}
-              placeholderText={PLACEHOLDER_TEXT.email}
+              placeholderText={placeholderEmail}
               isError={isEmailError}
               isEmpty={isEmailEmpty}
               isCorrect={isEmailCorrect}
               inputEvent={(e) => onChangeEmail(e)}
               passwordType={false}
               data={email}
-              clickEvent={(e) => clearEmail(e)}
+              clickEvent={() => clearEmail()}
             />
           </InputContainer>
         </SignupContainer>
@@ -190,7 +215,7 @@ const Signup = () => {
             <AgreeCheckBox>
               <AgreeCheckText>약관동의</AgreeCheckText>
               <AgreeCheckIcon
-                onClick={checkToggle}
+                onClick={handleCheck}
                 src={isCheck ? fullCheckBox : checkBox}
                 alt="checkBox"
               />
@@ -203,6 +228,7 @@ const Signup = () => {
         <LargeButton
           isActive={id && password && email && isCheck}
           text={"완료하기"}
+          clickEvent={handleComplete}
         ></LargeButton>
       </SignupPageArea>
     </>
