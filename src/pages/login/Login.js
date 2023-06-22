@@ -17,26 +17,29 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const placeholderText = {
+  const PLACEHOLDER_TEXT = {
     id: "아이디",
     password: "비밀번호",
-    email: "이메일",
   };
 
-  const helpText = {
-    id: "영문과 숫자을 조합하여 5~10글자 미만으로 입력하여 주세요.",
-    password:
-      "영문과 숫자, 특수기호를 조합하여 8~14 글자 미만으로 입력하여 주세요.",
-    email: "사용하실 이메일을 입력해주세요.",
+  const HELP_TEXT = {
+    id: "영문과 숫자를 조합하여 5 ~ 10 글자로 입력하여 주세요.",
+    password: "영문과 숫자,특수기호를 조합하여 8~14글자로 입력하여 주세요.",
   };
 
-  const messageText = {
+  const MESSAGE_TEXT = {
     id: "사용하실 수 없는 아이디 입니다.",
     password: "사용하실 수 없는 비밀번호 입니다.",
   };
 
-  const [idMessage, setIdMessage] = useState(helpText.id);
-  const [passwordMessage, setPasswordMessage] = useState(helpText.password);
+  const { id: placeholderId, password: placeholderPassword } = PLACEHOLDER_TEXT;
+
+  const { id: helpId, password: helpPassword } = HELP_TEXT;
+
+  const { id: messageId, password: messagePassword } = MESSAGE_TEXT;
+
+  const [idMessage, setIdMessage] = useState(helpId);
+  const [passwordMessage, setPasswordMessage] = useState(helpPassword);
 
   const onChangeId = (e) => {
     setId(e.target.value);
@@ -50,37 +53,37 @@ const Login = () => {
       : setIsPasswordEmpty(false);
   };
 
-  const clearId = (e) => {
+  const clearId = () => {
     setId("");
     setIsIdEmpty(true);
     setIsIdError(false);
-    setIdMessage(helpText.id);
+    setIdMessage(helpId);
   };
 
-  const clearPassword = (e) => {
+  const clearPassword = () => {
     setPassword("");
     setIsPasswordEmpty(true);
     setIsPasswordError(false);
-    setPasswordMessage(helpText.password);
+    setPasswordMessage(helpPassword);
   };
 
-  const checkContents = (e) => {
+  const checkContents = () => {
     const checkId = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,9}$/;
     const checkPassword =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,13}$/;
     if (!checkId.test(id) && checkPassword.test(password)) {
       setIsIdError(true);
       setIsPasswordError(false);
-      setIdMessage(messageText.id);
+      setIdMessage(messageId);
     } else if (checkId.test(id) && !checkPassword.test(password)) {
       setIsIdError(false);
       setIsPasswordError(true);
-      setPasswordMessage(messageText.password);
+      setPasswordMessage(messagePassword);
     } else if (!checkId.test(id) && !checkPassword.test(password)) {
       setIsIdError(true);
       setIsPasswordError(true);
-      setIdMessage(messageText.id);
-      setPasswordMessage(messageText.password);
+      setIdMessage(messageId);
+      setPasswordMessage(messagePassword);
     } else {
       navigate("/");
     }
@@ -94,25 +97,25 @@ const Login = () => {
           <LoginTitle>로그인</LoginTitle>
           <InputBox
             helpText={idMessage}
-            placeholderText={placeholderText.id}
+            placeholderText={placeholderId}
             isError={isIdError}
             isEmpty={isIdEmpty}
             isCorrect={isCorrect}
             passwordType={false}
             inputEvent={(e) => onChangeId(e)}
             data={id}
-            clickEvent={(e) => clearId(e)}
+            clickEvent={() => clearId()}
           />
           <InputBox
             helpText={passwordMessage}
-            placeholderText={placeholderText.password}
+            placeholderText={placeholderPassword}
             isError={isPasswordError}
             isEmpty={isPasswordEmpty}
             isCorrect={isCorrect}
             passwordType={true}
             inputEvent={(e) => onChangePassword(e)}
             data={password}
-            clickEvent={(e) => clearPassword(e)}
+            clickEvent={() => clearPassword()}
           />
           <ButtonArea>
             <LargeButton
