@@ -6,6 +6,7 @@ import { useState } from "react";
 import checkBox from "../../assets/images/icon_checkbox.svg";
 import fullCheckBox from "../../assets/images/icon_fullcheckbox.svg";
 import { AGREE_PAGE_TEXT } from "../../assets/data/AgreePageText";
+import { AxiosSignup } from "../../api/Signup";
 import { useNavigate } from "react-router-dom";
 
 const PLACEHOLDER_TEXT = {
@@ -64,17 +65,19 @@ const Signup = () => {
   const [isEmailCorrect, setIsEmailCorrect] = useState(false);
   const [isCheck, setIsCheck] = useState(false);
 
-  const goLogin = useNavigate();
-
   const handleCheck = () => {
     setIsCheck((prev) => !prev);
   };
 
+  const navigate = useNavigate();
+
+  const navigateSuccess = () => {
+    navigate("/login");
+  };
+
   const handleComplete = () => {
     if (id && password && email && isCheck) {
-      goLogin("/login");
-    } else {
-      goLogin("/join");
+      AxiosSignup({ id, password, email }, navigateSuccess);
     }
   };
 
