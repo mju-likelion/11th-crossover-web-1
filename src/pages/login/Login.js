@@ -4,6 +4,7 @@ import InputBox from "../../components/InputBox";
 import LargeButton from "../../components/LargeButton";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AxiosLogin } from "../../api/Login";
 
 const Login = () => {
   const [id, setId] = useState("");
@@ -67,7 +68,13 @@ const Login = () => {
     setPasswordMessage(helpPassword);
   };
 
+  const successToken = (token) => {
+    localStorage.setItem("token", token);
+    navigate("/");
+  };
+
   const checkContents = () => {
+    AxiosLogin({ id, password }, successToken);
     const checkId = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,9}$/;
     const checkPassword =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,13}$/;
@@ -84,8 +91,6 @@ const Login = () => {
       setIsPasswordError(true);
       setIdMessage(messageId);
       setPasswordMessage(messagePassword);
-    } else {
-      navigate("/");
     }
   };
 
