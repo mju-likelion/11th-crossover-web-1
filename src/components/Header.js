@@ -10,14 +10,26 @@ const Header = ({ isVisible }) => {
 
   const navigate = useNavigate();
 
+  const goLogin = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    goLogin("/login");
+  };
+
   return (
     <HeaderTopArea>
-      <HeaderTitleBox onClick={(e) => navigate("/")}>
+      <HeaderTitleBox onClick={() => navigate("/")}>
         <HeaderTitle>비행기레터</HeaderTitle>
         <img src={plane_img} alt="plane_image" />
       </HeaderTitleBox>
       <HeaderLogout>
-        <LogoutImg src={logout_img} isVisible={isVisible} alt="logout_image" />
+        <LogoutImg
+          src={logout_img}
+          isVisible={isVisible}
+          alt="logout_image"
+          onClick={handleLogout}
+        />
       </HeaderLogout>
     </HeaderTopArea>
   );
