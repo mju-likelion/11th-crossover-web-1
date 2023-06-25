@@ -71,8 +71,8 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  const navigateSuccess = {
-    navigateSuccess: () => navigate("/login"),
+  const navigateSuccess = () => {
+    navigate("/login");
   };
 
   const handleComplete = () => {

@@ -1,8 +1,6 @@
 import { Axios } from "./Axios";
 
-export const AxiosSignup = (data, callbackFunctions) => {
-  const { navigateSuccess } = callbackFunctions;
-
+export const AxiosSignup = (data, navigateSuccess) => {
   const { id, password, email } = data;
 
   Axios.post("/api/auth/register", {
