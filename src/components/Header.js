@@ -19,7 +19,13 @@ const Header = ({ isVisible }) => {
 
   return (
     <HeaderTopArea>
-      <HeaderTitleBox onClick={() => navigate("/")}>
+      <HeaderTitleBox
+        onClick={
+          localStorage.getItem("token")
+            ? () => navigate("/")
+            : () => navigate("/login")
+        }
+      >
         <HeaderTitle>비행기레터</HeaderTitle>
         <img src={plane_img} alt="plane_image" />
       </HeaderTitleBox>

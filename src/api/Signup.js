@@ -1,4 +1,4 @@
-import { Axios } from "./Axios";
+import Axios from "./Axios";
 
 export const AxiosSignup = (data, navigateSuccess) => {
   const { id, password, email } = data;
