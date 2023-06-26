@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import SmallButton from "./SmallButton";
 import { AxiosPost } from "../api/Post";
+import { useNavigate } from "react-router-dom";
 
 const DetailBox = ({ isWrite }) => {
   const [title, setTitle] = useState("");
@@ -11,6 +12,7 @@ const DetailBox = ({ isWrite }) => {
   const [detailCount, setDetailCount] = useState(0);
 
   const [isActive, setIsActive] = useState(false);
+  const navigate = useNavigate();
 
   const onChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -20,6 +22,10 @@ const DetailBox = ({ isWrite }) => {
   const onChangeDetail = (e) => {
     setDetail(e.target.value);
     setDetailCount(e.target.value.length);
+  };
+
+  const goMain = () => {
+    navigate("/");
   };
 
   useEffect(() => {
@@ -63,7 +69,7 @@ const DetailBox = ({ isWrite }) => {
               type={!isWrite && "black"}
               text={isWrite ? "작성하기" : "삭제하기"}
               isActive={isActive}
-              clickEvent={(data = { title, detail }) => AxiosPost}
+              clickEvent={() => AxiosPost({ title, detail }, goMain)}
             />
           </ButtonArea>
         </AlarmArea>

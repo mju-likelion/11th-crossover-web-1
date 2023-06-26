@@ -1,11 +1,11 @@
 import Axios from "./Axios";
 
-export const AxiosPost = (data) => {
+export const AxiosPost = (data, usecallbackFunction) => {
   const { title, detail } = data;
 
   Axios.post(
     "/api/posts",
-    { title, detail },
+    { title: title, content: detail },
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -13,7 +13,7 @@ export const AxiosPost = (data) => {
     }
   )
     .then((res) => {
-      console.log(res.data);
+      usecallbackFunction();
     })
     .catch((error) => {
       error.response.data.message.map((message) => alert(message));
