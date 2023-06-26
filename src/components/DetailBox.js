@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import SmallButton from "./SmallButton";
+import { AxiosPost } from "../api/Post";
 
 const DetailBox = ({ isWrite }) => {
   const [title, setTitle] = useState("");
@@ -62,6 +63,7 @@ const DetailBox = ({ isWrite }) => {
               type={!isWrite && "black"}
               text={isWrite ? "작성하기" : "삭제하기"}
               isActive={isActive}
+              clickEvent={(data = { title, detail }) => AxiosPost}
             />
           </ButtonArea>
         </AlarmArea>
