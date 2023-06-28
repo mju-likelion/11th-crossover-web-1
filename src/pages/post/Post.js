@@ -8,7 +8,7 @@ const Post = () => {
       <Header isVisible={true} />
       <PostPageArea>
         <PostContentArea>
-          <DetailBox isWrite={true} />
+          <DetailBox isMine={true} />
         </PostContentArea>
       </PostPageArea>
     </>
