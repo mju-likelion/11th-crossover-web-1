@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ContentBox = ({ content, id, isMine, title, updatedAt }) => {
   const navigate = useNavigate();
+  const { title, content, createdAt, isMine } = dataContents;
 
   return (
     <>
@@ -16,7 +17,9 @@ const ContentBox = ({ content, id, isMine, title, updatedAt }) => {
             <DetailContent>{content}</DetailContent>
           </DetailBox>
           <TimeArea>
+
             <TimeBox>{updatedAt}</TimeBox>
+
           </TimeArea>
         </DetailArea>
       </ContentArea>
