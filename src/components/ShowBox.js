@@ -2,31 +2,18 @@ import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import SmallButton from "./SmallButton";
 import { useNavigate, useParams } from "react-router-dom";
-import Axios from "../api/Axios";
 import { AxiosDelete } from "../api/Delete";
+import { AxiosDetail } from "../api/Detail";
 
 const ShowBox = () => {
   const params = useParams();
+
   const [data, setData] = useState([]);
   useEffect(() => {
-    Axios.get(`/api/posts/${params.id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((error) => {
-        error.response.data.message.map((message) => alert(message));
-      });
+    AxiosDetail(params.id, (res) => setData(res));
   }, [params.id]);
 
-  const title = data.title;
-  const titleCount = String(data.title).length;
-
-  const detail = data.content;
-  const detailCount = String(data.content).length;
+  const { title, content } = data;
   const isActive = useState(true);
 
   const navigate = useNavigate();
@@ -41,14 +28,14 @@ const ShowBox = () => {
           <TitleContent>
             <TitleDiv>제목: </TitleDiv>
             <TitleBox>{title}</TitleBox>
-            <TitleCount>({titleCount} / 20)</TitleCount>
+            <TitleCount>({title && title.length} / 20)</TitleCount>
           </TitleContent>
         </ShowTitleArea>
         <DetailBoxArea>
           <DetailContent>
-            <DetailBox>{detail}</DetailBox>
+            <DetailBox>{content}</DetailBox>
           </DetailContent>
-          <DetailCount>({detailCount} / 140)</DetailCount>
+          <DetailCount>({content && content.length} / 140)</DetailCount>
         </DetailBoxArea>
         <AlarmArea>
           <AlarmContent>※ 작성된 게시글은 수정이 불가합니다.</AlarmContent>
