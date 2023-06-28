@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import Header from "../../components/Header";
-import DetailBox from "../../components/DetailBox";
+import ShowBox from "../../components/ShowBox";
 
 const Content = () => {
   return (
@@ -8,7 +8,7 @@ const Content = () => {
       <Header isVisible={true} />
       <ContentPageArea>
         <ContentArea>
-          <DetailBox isWrite={false} />
+          <ShowBox />
         </ContentArea>
       </ContentPageArea>
     </>

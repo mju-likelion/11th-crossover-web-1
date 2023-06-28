@@ -98,7 +98,7 @@ const Login = () => {
     <>
       <Header isVisible={false} />
       <LoginPageArea>
-        <LoginContentArea>
+        <LoginContentArea isLogin={localStorage.getItem("token")}>
           <LoginTitle>로그인</LoginTitle>
           <InputBox
             helpText={idMessage}
@@ -157,10 +157,10 @@ const LoginContentArea = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 114px;
+  display: ${({ isLogin }) => (isLogin ? "none" : "block")};
 `;
 
 const LoginTitle = styled.div`
-  width: 150px;
   height: 74px;
   font-size: 50px;
   font-weight: 600;

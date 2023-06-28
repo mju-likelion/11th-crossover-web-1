@@ -13,20 +13,19 @@ const ContentBox = ({ id, dataContents }) => {
     */
 
   const navigate = useNavigate();
+  const { title, content, createdAt, isMine } = dataContents;
 
   return (
     <>
       <ContentArea onClick={() => navigate(`/${id}`)}>
-        <ProfileImg
-          src={dataContents.isMine ? colorProfile_img : defaultProfile_img}
-        />
+        <ProfileImg src={isMine ? colorProfile_img : defaultProfile_img} />
         <DetailArea>
-          <TitleArea>제목 : {dataContents.title}</TitleArea>
+          <TitleArea>제목 : {title}</TitleArea>
           <DetailBox>
-            <DetailContent>{dataContents.detail}</DetailContent>
+            <DetailContent>{content}</DetailContent>
           </DetailBox>
           <TimeArea>
-            <TimeBox>{dataContents.time}</TimeBox>
+            <TimeBox>{createdAt}</TimeBox>
           </TimeArea>
         </DetailArea>
       </ContentArea>

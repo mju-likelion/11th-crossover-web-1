@@ -1,64 +1,52 @@
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import SmallButton from "./SmallButton";
-import { AxiosPost } from "../api/Post";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Axios from "../api/Axios";
+import { AxiosDelete } from "../api/Delete";
 
-const DetailBox = ({ isMine }) => {
-  const [title, setTitle] = useState("");
-  const [titleCount, setTitleCount] = useState(0);
+const ShowBox = () => {
+  const params = useParams();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    Axios.get(`/api/posts/${params.id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((error) => {
+        error.response.data.message.map((message) => alert(message));
+      });
+  }, [params.id]);
 
-  const [detail, setDetail] = useState("");
-  const [detailCount, setDetailCount] = useState(0);
+  const title = data.title;
+  const titleCount = String(data.title).length;
 
-  const [isActive, setIsActive] = useState(false);
+  const detail = data.content;
+  const detailCount = String(data.content).length;
+  const isActive = useState(true);
+
   const navigate = useNavigate();
-
-  const onChangeTitle = (e) => {
-    setTitle(e.target.value);
-    setTitleCount(e.target.value.length);
-  };
-
-  const onChangeDetail = (e) => {
-    setDetail(e.target.value);
-    setDetailCount(e.target.value.length);
-  };
-
   const goMain = () => {
     navigate("/");
   };
 
-  useEffect(() => {
-    title && detail ? setIsActive(true) : setIsActive(false);
-  }, [title, detail]);
-
   return (
     <>
-      <DetailArea>
-        <DetailTitleArea>
+      <ShowArea>
+        <ShowTitleArea>
           <TitleContent>
             <TitleDiv>제목: </TitleDiv>
-            <InputTitle
-              id="title"
-              type="text"
-              name="title"
-              maxLength={20}
-              value={title}
-              onChange={onChangeTitle}
-            />
+            <TitleBox>{title}</TitleBox>
             <TitleCount>({titleCount} / 20)</TitleCount>
           </TitleContent>
-        </DetailTitleArea>
+        </ShowTitleArea>
         <DetailBoxArea>
           <DetailContent>
-            <InputDetail
-              id="detail"
-              type="text"
-              name="detail"
-              maxLength={140}
-              value={detail}
-              onChange={onChangeDetail}
-            />
+            <DetailBox>{detail}</DetailBox>
           </DetailContent>
           <DetailCount>({detailCount} / 140)</DetailCount>
         </DetailBoxArea>
@@ -66,24 +54,24 @@ const DetailBox = ({ isMine }) => {
           <AlarmContent>※ 작성된 게시글은 수정이 불가합니다.</AlarmContent>
           <ButtonArea>
             <SmallButton
-              type={!isMine && "black"}
-              text={"작성하기"}
+              type={"black"}
+              text={"삭제하기"}
               isActive={isActive}
-              isMine={isMine}
-              clickEvent={() => AxiosPost({ title, detail }, goMain)}
+              isMine={data.isMine}
+              clickEvent={() => AxiosDelete(params.id, goMain)}
             />
           </ButtonArea>
         </AlarmArea>
-      </DetailArea>
+      </ShowArea>
     </>
   );
 };
 
-const DetailArea = styled.div`
+const ShowArea = styled.div`
   width: 794px;
 `;
 
-const DetailTitleArea = styled.div`
+const ShowTitleArea = styled.div`
   width: 794px;
   height: 134px;
   border-radius: 25px;
@@ -116,14 +104,13 @@ const TitleDiv = styled.div`
   line-height: 24px;
 `;
 
-const InputTitle = styled.input`
+const TitleBox = styled.div`
   width: 560px;
   height: 24px;
   font-size: 24px;
   font-weight: 600;
   line-height: 24px;
   border: none;
-  outline: none;
 `;
 
 const TitleCount = styled.div`
@@ -142,15 +129,13 @@ const DetailContent = styled.div`
   margin-left: 35px;
 `;
 
-const InputDetail = styled.textarea`
+const DetailBox = styled.div`
   width: 714px;
   height: 627px;
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
   border: none;
-  outline: none;
-  resize: none;
 `;
 
 const DetailCount = styled.div`
@@ -184,4 +169,4 @@ const ButtonArea = styled.div`
   float: right;
 `;
 
-export default DetailBox;
+export default ShowBox;
