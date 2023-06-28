@@ -3,9 +3,8 @@ import colorProfile_img from "../assets/images/icon_colorProfile.svg";
 import defaultProfile_img from "../assets/images/icon_defaultProfile.svg";
 import { useNavigate } from "react-router-dom";
 
-const ContentBox = ({ content, id, isMine, title, updatedAt }) => {
+const ContentBox = ({ content, id, isMine, title, createdAt }) => {
   const navigate = useNavigate();
-  const { title, content, createdAt, isMine } = dataContents;
 
   return (
     <>
@@ -17,9 +16,7 @@ const ContentBox = ({ content, id, isMine, title, updatedAt }) => {
             <DetailContent>{content}</DetailContent>
           </DetailBox>
           <TimeArea>
-
-            <TimeBox>{updatedAt}</TimeBox>
-
+            <TimeBox>{createdAt}</TimeBox>
           </TimeArea>
         </DetailArea>
       </ContentArea>
