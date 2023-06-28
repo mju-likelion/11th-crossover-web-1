@@ -8,6 +8,7 @@ export const AxiosLogin = (data, usecallbackFunction) => {
     password,
   })
     .then((res) => {
+      console.log(res);
       usecallbackFunction(res.data.accessToken);
     })
     .catch((error) => {
