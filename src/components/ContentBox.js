@@ -3,30 +3,20 @@ import colorProfile_img from "../assets/images/icon_colorProfile.svg";
 import defaultProfile_img from "../assets/images/icon_defaultProfile.svg";
 import { useNavigate } from "react-router-dom";
 
-const ContentBox = ({ id, dataContents }) => {
-  /*
-        id는 해당 작성글의 고유 id,
-        isMine은 해당 내용이 본인이 작성한 것이면 true,
-        title은 해당 내용의 제목,
-        detail은 해당 내용의 세부 내용,
-        time은 해당 내용의 작성 시간입니다. (아직 확정 안된 임의의 값 입니다.)
-    */
-
+const ContentBox = ({ content, id, isMine, title, updatedAt }) => {
   const navigate = useNavigate();
 
   return (
     <>
       <ContentArea onClick={() => navigate(`/${id}`)}>
-        <ProfileImg
-          src={dataContents.isMine ? colorProfile_img : defaultProfile_img}
-        />
+        <ProfileImg src={isMine ? colorProfile_img : defaultProfile_img} />
         <DetailArea>
-          <TitleArea>제목 : {dataContents.title}</TitleArea>
+          <TitleArea>제목 : {title}</TitleArea>
           <DetailBox>
-            <DetailContent>{dataContents.detail}</DetailContent>
+            <DetailContent>{content}</DetailContent>
           </DetailBox>
           <TimeArea>
-            <TimeBox>{dataContents.time}</TimeBox>
+            <TimeBox>{updatedAt}</TimeBox>
           </TimeArea>
         </DetailArea>
       </ContentArea>
