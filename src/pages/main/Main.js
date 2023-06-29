@@ -11,18 +11,45 @@ const Main = () => {
   const goPost = useNavigate();
 
   const [post, setPost] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await AxiosMain();
-        setPost(data);
+        const data = await AxiosMain(page);
+        callbackFunctions.getDataSuccess(data);
+        setPage((prev) => prev + 1);
       } catch (error) {
         alert(error);
       }
     };
     fetchData();
   }, []);
+
+  const callbackFunctions = {
+    getDataSuccess: (data) => {
+      setPost((prevData) => [...prevData, ...data]);
+    },
+    setPageNumber: () => {
+      setPage((prev) => prev + 1);
+    },
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight
+      ) {
+        AxiosMain(page).then((data) => {
+          callbackFunctions.getDataSuccess(data);
+          callbackFunctions.setPageNumber();
+        });
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [page]);
 
   return (
     <>
@@ -32,6 +59,7 @@ const Main = () => {
           <ButtonArea>
             <SmallButton
               isActive={true}
+              isMine={true}
               text={"작성하기"}
               clickEvent={() => goWrite("/write")}
             />

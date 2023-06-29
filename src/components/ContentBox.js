@@ -3,9 +3,25 @@ import colorProfile_img from "../assets/images/icon_colorProfile.svg";
 import defaultProfile_img from "../assets/images/icon_defaultProfile.svg";
 import { useNavigate } from "react-router-dom";
 
-const ContentBox = ({ content, id, isMine, title, updatedAt }) => {
+const ContentBox = ({ content, id, isMine, title, createdAt }) => {
   const navigate = useNavigate();
-  const { title, content, createdAt, isMine } = dataContents;
+
+  const newTime = (createdAt) => {
+    const now = new Date();
+    const createdDate = new Date(createdAt);
+    const timeDiff = now.getTime() - createdDate.getTime();
+
+    const hours = createdDate.getHours();
+    const minutes = String(createdDate.getMinutes()).padStart(2, "0");
+
+    const daysBefore = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+    if (timeDiff < 1000 * 60 * 60 * 24) {
+      return `${hours}:${minutes}`;
+    } else {
+      return `${daysBefore}일 전`;
+    }
+  };
 
   return (
     <>
@@ -17,9 +33,7 @@ const ContentBox = ({ content, id, isMine, title, updatedAt }) => {
             <DetailContent>{content}</DetailContent>
           </DetailBox>
           <TimeArea>
-
-            <TimeBox>{updatedAt}</TimeBox>
-
+            <TimeBox>{newTime(createdAt)}</TimeBox>
           </TimeArea>
         </DetailArea>
       </ContentArea>
@@ -85,8 +99,6 @@ const TimeArea = styled.div`
 `;
 
 const TimeBox = styled.div`
-  width: 52px;
-  height: 28px;
   font-size: 20px;
   font-weight: 500;
   line-height: 28px;
