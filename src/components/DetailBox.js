@@ -70,7 +70,7 @@ const DetailBox = ({ isMine }) => {
               text={"작성하기"}
               isactive={isActive}
               ismine={isMine}
-              clickEvent={() => AxiosPost({ title, detail }, goMain)}
+              clickevent={() => AxiosPost({ title, detail }, goMain)}
             />
           </ButtonArea>
         </AlarmArea>
