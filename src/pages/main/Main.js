@@ -30,7 +30,7 @@ const Main = () => {
     getDataSuccess: (data) => {
       setPost((prevData) => [...prevData, ...data]);
     },
-    setPageNumber: () => {
+    setPageIncrease: () => {
       setPage((prev) => prev + 1);
     },
   };
@@ -38,12 +38,12 @@ const Main = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + window.scrollY >=
+        window.innerHeight + Math.floor(window.scrollY) >=
         document.documentElement.scrollHeight
       ) {
         AxiosMain(page).then((data) => {
           callbackFunctions.getDataSuccess(data);
-          callbackFunctions.setPageNumber();
+          callbackFunctions.setPageIncrease();
         });
       }
     };
