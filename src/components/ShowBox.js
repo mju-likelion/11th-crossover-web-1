@@ -45,7 +45,7 @@ const ShowBox = () => {
               text={"삭제하기"}
               isactive={isActive}
               ismine={data.isMine}
-              clickEvent={() => AxiosDelete(params.id, goMain)}
+              clickevent={() => AxiosDelete(params.id, goMain)}
             />
           </ButtonArea>
         </AlarmArea>
