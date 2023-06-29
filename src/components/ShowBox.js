@@ -43,8 +43,8 @@ const ShowBox = () => {
             <SmallButton
               type={"black"}
               text={"삭제하기"}
-              isActive={isActive}
-              isMine={data.isMine}
+              isactive={isActive}
+              ismine={data.isMine}
               clickEvent={() => AxiosDelete(params.id, goMain)}
             />
           </ButtonArea>

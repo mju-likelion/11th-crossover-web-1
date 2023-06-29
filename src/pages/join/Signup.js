@@ -174,37 +174,37 @@ const Signup = () => {
           <SignupTitle>회원가입</SignupTitle>
           <InputContainer>
             <InputBox
-              helpText={idMessage}
-              placeholderText={placeholderId}
-              isError={isIdError}
-              isEmpty={isIdEmpty}
-              isCorrect={isIdCorrect}
-              inputEvent={onChangeId}
-              passwordType={false}
+              helptext={idMessage}
+              placeholdertext={placeholderId}
+              iserror={isIdError && "false"}
+              isempty={isIdEmpty}
+              iscorrect={isIdCorrect && "true"}
+              inputevent={onChangeId}
+              passwordtype={false}
               data={id}
-              clickEvent={clearId}
+              clickevent={clearId}
             />
             <InputBox
-              helpText={passwordMessage}
-              placeholderText={placeholderPassword}
-              isError={isPasswordError}
-              isEmpty={isPasswordEmpty}
-              isCorrect={isPasswordCorrect}
-              inputEvent={onChangePassword}
-              passwordType={true}
+              helptext={passwordMessage}
+              placeholdertext={placeholderPassword}
+              iserror={isPasswordError}
+              isempty={isPasswordEmpty}
+              iscorrect={isPasswordCorrect}
+              inputevent={onChangePassword}
+              passwordtype={true}
               data={password}
-              clickEvent={clearPassword}
+              clickevent={clearPassword}
             />
             <InputBox
-              helpText={emailMessage}
-              placeholderText={placeholderEmail}
-              isError={isEmailError}
-              isEmpty={isEmailEmpty}
-              isCorrect={isEmailCorrect}
-              inputEvent={onChangeEmail}
-              passwordType={false}
+              helptext={emailMessage}
+              placeholdertext={placeholderEmail}
+              iserror={isEmailError}
+              isempty={isEmailEmpty}
+              iscorrect={isEmailCorrect}
+              inputevent={onChangeEmail}
+              passwordtype={false}
               data={email}
-              clickEvent={clearEmail}
+              clickevent={clearEmail}
             />
           </InputContainer>
         </SignupContainer>
@@ -229,9 +229,9 @@ const Signup = () => {
           </AgreePageBox>
         </AgreeContainer>
         <LargeButton
-          isActive={id && password && email && isCheck}
+          isactive={id && password && email && isCheck}
           text={"완료하기"}
-          clickEvent={handleComplete}
+          clickevent={handleComplete}
         ></LargeButton>
       </SignupPageArea>
     </>

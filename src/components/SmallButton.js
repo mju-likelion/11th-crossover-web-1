@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-const SmallButton = ({ text, isActive, clickEvent, type, isMine }) => {
+const SmallButton = ({ text, isactive, clickevent, type, ismine }) => {
   return (
     <Button
       type={type}
-      isActive={isActive}
-      isMine={isMine}
+      isactive={isactive}
+      ismine={ismine}
       onClick={(e) => {
-        clickEvent(e);
+        clickevent(e);
       }}
     >
       {text}
@@ -23,7 +23,7 @@ const Button = styled.button`
   background-color: ${(props) =>
     props.type === "black"
       ? props.theme.colors.GRAY
-      : props.isActive
+      : props.isactive
       ? props.theme.colors.BLUE2
       : props.theme.colors.BLUE1};
   border-radius: 25px;
@@ -31,7 +31,7 @@ const Button = styled.button`
   font-size: 21px;
   line-height: 44px;
   text-align: center;
-  display: ${({ isMine }) => (isMine ? "block" : "none")};
+  display: ${({ ismine }) => (ismine ? "block" : "none")};
   border: none;
   &:hover {
     cursor: pointer;
