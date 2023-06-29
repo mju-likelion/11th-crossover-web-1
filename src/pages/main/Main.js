@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 const Main = () => {
   const goWrite = useNavigate();
   const goPost = useNavigate();
+  const goLogin = useNavigate();
 
   const [post, setPost] = useState([]);
   const [page, setPage] = useState(1);
@@ -23,7 +24,12 @@ const Main = () => {
         alert(error);
       }
     };
-    fetchData();
+    if (!localStorage.getItem("token")) {
+      goLogin("/login");
+      alert("로그인이 필요합니다!");
+    } else {
+      fetchData();
+    }
   }, []);
 
   const callbackFunctions = {
@@ -53,15 +59,15 @@ const Main = () => {
 
   return (
     <>
-      <Header isVisible={true} />
+      <Header isvisible={true} />
       <MainPageArea>
         <ContentArea>
           <ButtonArea>
             <SmallButton
-              isActive={true}
-              isMine={true}
+              isactive={true}
+              ismine={true}
               text={"작성하기"}
-              clickEvent={() => goWrite("/write")}
+              clickevent={() => goWrite("/write")}
             />
           </ButtonArea>
           <DetailArea>

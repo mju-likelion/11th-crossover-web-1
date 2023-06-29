@@ -68,8 +68,8 @@ const DetailBox = ({ isMine }) => {
             <SmallButton
               type={!isMine && "black"}
               text={"작성하기"}
-              isActive={isActive}
-              isMine={isMine}
+              isactive={isActive}
+              ismine={isMine}
               clickEvent={() => AxiosPost({ title, detail }, goMain)}
             />
           </ButtonArea>

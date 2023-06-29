@@ -101,32 +101,32 @@ const Login = () => {
         <LoginContentArea isLogin={localStorage.getItem("token")}>
           <LoginTitle>로그인</LoginTitle>
           <InputBox
-            helpText={idMessage}
-            placeholderText={placeholderId}
-            isError={isIdError}
-            isEmpty={isIdEmpty}
-            isCorrect={isCorrect}
-            passwordType={false}
-            inputEvent={onChangeId}
+            helptext={idMessage}
+            placeholdertext={placeholderId}
+            iserror={isIdError}
+            isempty={isIdEmpty}
+            iscorrect={isCorrect}
+            passwordtype={false}
+            inputevent={onChangeId}
             data={id}
-            clickEvent={clearId}
+            clickevent={clearId}
           />
           <InputBox
-            helpText={passwordMessage}
-            placeholderText={placeholderPassword}
-            isError={isPasswordError}
-            isEmpty={isPasswordEmpty}
-            isCorrect={isCorrect}
-            passwordType={true}
-            inputEvent={onChangePassword}
+            helptext={passwordMessage}
+            placeholdertext={placeholderPassword}
+            iserror={isPasswordError}
+            isempty={isPasswordEmpty}
+            iscorrect={isCorrect}
+            passwordtype={true}
+            inputevent={onChangePassword}
             data={password}
-            clickEvent={clearPassword}
+            clickevent={clearPassword}
           />
           <ButtonArea>
             <LargeButton
-              isActive={id && password}
+              isactive={id && password}
               text={"로그인"}
-              clickEvent={checkContents}
+              clickevent={checkContents}
             />
           </ButtonArea>
           <JoinLink

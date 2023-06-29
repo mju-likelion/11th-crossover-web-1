@@ -4,9 +4,8 @@ import logout_img from "../assets/images/icon_logout.svg";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-// 하단 border, isVisible props 추가
-const Header = ({ isVisible }) => {
-  //로그인과 회원가입에서는 로그아웃 버튼이 나올 필요가 없으르모 isVisible=false로 놓으면 됩니다.
+const Header = ({ isvisible }) => {
+  //로그인과 회원가입에서는 로그아웃 버튼이 나올 필요가 없으르모 isvisible=false로 놓으면 됩니다.
 
   const navigate = useNavigate();
 
@@ -32,7 +31,7 @@ const Header = ({ isVisible }) => {
       <HeaderLogout>
         <LogoutImg
           src={logout_img}
-          isVisible={isVisible}
+          isvisible={isvisible}
           alt="logout_image"
           onClick={handleLogout}
         />
@@ -73,7 +72,7 @@ const HeaderLogout = styled.div`
 `;
 
 const LogoutImg = styled.img`
-  display: ${({ isVisible }) => (isVisible ? "block" : "none")};
+  display: ${({ isvisible }) => (isvisible ? "block" : "none")};
 `;
 
 export default Header;
